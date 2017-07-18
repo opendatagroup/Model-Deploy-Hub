@@ -1,0 +1,10 @@
+hub:
+    cookieSecret: "821504fe5879054fd5e03a380ba90bfb4b95b73c3c255bac3dccb5855575a855"
+proxy:
+    secretToken: "3366e8fc0748609355ac37b5cffc252c63be3a1f17e6ebe5f29c1801413810d7"
+auth:
+    type: github
+    github:
+        clientId: "42066cc02d3b6ac2f687"
+        clientSecret: "853d2d8af2415d33e1b26811cf534927ca28e6a4"
+        callbackUrl: "http://104.154.88.158/hub/oauth_callback"

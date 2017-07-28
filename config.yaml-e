@@ -2,7 +2,7 @@ hub:
     cookieSecret: "821504fe5879054fd5e03a380ba90bfb4b95b73c3c255bac3dccb5855575a855"
     image:
         name: jackmoore/hub
-        tag: 923851c725dadc6dee28573cd9b1bc1b
+        tag: NEWTAG
     # extraConfig: |
     #     c.JupyterHub.load_groups = {
     #         'shared': [
@@ -35,7 +35,7 @@ singleuser:
         homeMountPath: /home/jovyan/work
     image:
         name: jackmoore/notebook
-        tag: 923851c725dadc6dee28573cd9b1bc1b
+        tag: NEWTAG
 auth:
     type: github
     github:

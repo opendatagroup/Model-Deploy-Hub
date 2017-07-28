@@ -4,6 +4,7 @@ RUN apt-get update
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+      vim \
       git \
       python3 \
       python3-setuptools \
@@ -29,6 +30,8 @@ RUN pip3 --no-cache-dir install git+https://github.com/jupyterhub/kubespawner@80
 
 ADD jupyterhub_config.py /srv/jupyterhub_config.py
 ADD cull_idle_servers.py /usr/local/bin/cull_idle_servers.py
+
+ADD jupyter.png /usr/local/share/jupyter/hub/static/images/jupyter.png
 
 WORKDIR /srv/jupyterhub
 

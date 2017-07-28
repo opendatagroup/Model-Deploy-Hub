@@ -212,7 +212,7 @@ c.Authenticator.admin_users = get_config('admin.users', [])
 
 if get_config('cull.enabled', False):
     cull_timeout = get_config('cull.timeout')
-    cull_every = get_config('cull.every')
+    cull_every = 602
     c.JupyterHub.services = [
         {
             'name': 'cull-idle',

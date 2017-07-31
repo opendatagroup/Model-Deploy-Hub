@@ -1,5 +1,4 @@
 # Model Deploy Hub
 
-Useful: 
-kubectl --namespace=mdhub exec -it jupyter-jackmoore5021 -- /bin/bash
-helm upgrade mdhub jupyterhub/jupyterhub --version=v0.4 -f config.yaml --timeout 1800
+Model-Deploy-Hub is an implementation of jupyterhub on a kubernetes cluster
+using the fastscore model deploy notebook.

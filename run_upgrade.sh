@@ -38,35 +38,25 @@ helm upgrade mdhub jupyterhub/jupyterhub --version=v0.4 -f config.yaml --timeout
 printf "DONE!\n"
 
 
-
+# Collect hub id
 HUBID="INVALID ID"
-out=$(kubectl --namespace=mdhub get pods)
-for a in $out
-do
-	if [[ ${a} == h* ]]; then
-		HUBID=${a}
-	fi
-done
+HUBID=$(kubectl --namespace=mdhub get pods | grep hub | grep ContainerCreating | awk '{print $1;}')
 if [ HUBID == "INVALID ID" ]; then
 	echo 'ERROR WITH HUB ID'
 	exit 1
 fi
 
+
+# Wait for hub to get up and running
 STATUS="ContainerCreating"
 printf "Waiting for hub to deploy..."
-while [ $STATUS == "ContainerCreating" ] || [ $STATUS == "Terminating" ]
+while [ $STATUS == "ContainerCreating" ]
 do
-	out=$(kubectl --namespace=mdhub get pods ${HUBID})
-	count=0
-	for a in $out
-	do
-		count=$((count+1))
-		if [[ ${count} == 8 ]]; then
-			STATUS=${a}
-		fi
-	done
-	sleep 5
+	STATUS=$(kubectl --namespace=mdhub get pods ${HUBID} | grep hub | awk '{print $3;}')
+	sleep 1
 done
+
+# Open web page if running
 if [ $STATUS == "Running" ]; then
 	printf "DONE!\nOpening web page in incognito mode on chrome..."
 	bash run_openpage.sh

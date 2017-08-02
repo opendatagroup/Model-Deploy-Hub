@@ -38,4 +38,6 @@ WORKDIR /srv/jupyterhub
 # JupyterHub API port
 EXPOSE 8081
 
+
+RUN pip3 install jupyter
 CMD jupyterhub --config /srv/jupyterhub_config.py --no-ssl

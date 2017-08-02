@@ -45,6 +45,8 @@ spec:
         env:
         # Put this here directly so hub will restart when we
         # change this
+        - name: IPADDRESS
+          value: "https://130.211.206.35:30001/"
         - name: SINGLEUSER_IMAGE
           value:  "{{ .Values.singleuser.image.name }}:{{ .Values.singleuser.image.tag }}"
         - name: JPY_COOKIE_SECRET

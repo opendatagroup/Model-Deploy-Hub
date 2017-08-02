@@ -33,6 +33,11 @@ ADD cull_idle_servers.py /usr/local/bin/cull_idle_servers.py
 
 ADD jupyter.png /usr/local/share/jupyter/hub/static/images/jupyter.png
 
+ADD fastscore-cli-1.5 /srv/fastscore-cli
+WORKDIR /srv/fastscore-cli
+RUN python3 setup.py install
+ADD config.yml /srv
+
 WORKDIR /srv/jupyterhub
 
 # JupyterHub API port

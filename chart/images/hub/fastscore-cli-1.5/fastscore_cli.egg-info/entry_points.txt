@@ -1,0 +1,3 @@
+[console_scripts]
+fastscore = fastscore.dispatch:main
+

@@ -11,6 +11,7 @@ RUN apt-get update && \
       libcurl4-openssl-dev \
       build-essential \
       python3-dev \
+      curl \
       libssl-dev \
       python3-pip && \
      apt-get purge && apt-get clean
@@ -36,7 +37,7 @@ ADD jupyter.png /usr/local/share/jupyter/hub/static/images/jupyter.png
 ADD fastscore-cli-1.5 /srv/fastscore-cli
 WORKDIR /srv/fastscore-cli
 RUN python3 setup.py install
-ADD config.yml /srv
+ADD post_start /srv/post_start
 
 WORKDIR /srv/jupyterhub
 

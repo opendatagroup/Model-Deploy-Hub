@@ -2,30 +2,16 @@ hub:
     cookieSecret: "821504fe5879054fd5e03a380ba90bfb4b95b73c3c255bac3dccb5855575a855"
     image:
         name: jackmoore/hub
-        tag: 7526bc65b26e314813919138bd4ba9c6
-    extraConfig: |
-        c.JupyterHub.load_groups = {
-            'shared': [
-                'jackmoore5021',
-                'willingc',
-            ]
-        }
-        c.JupyterHub.services = [
-            {
-                'name': 'shared-notebook',
-                'url': 'http://127.0.0.1:9999',
-                'command': [
-                    'jupyterhub-singleuser',
-                    '--group=shared',
-                    '--debug',
-                ],
-            }
-        ]
+        tag: 0bd6b112a636d4800675a470dd6df369
+    lifecycleHooks:
+        postStart:
+            exec:
+                command: ["/bin/sh","-c","export CONNECTIP='https://130.211.206.35:30001'"]
 proxy:
     secretToken: "3366e8fc0748609355ac37b5cffc252c63be3a1f17e6ebe5f29c1801413810d7"
 singleuser:
     extraEnv:
-        EDITOR: vim
+        ENGINE_CONTAINER: "engine-x-1"
     storage:
         type: dynamic
         static:
@@ -35,11 +21,14 @@ singleuser:
         homeMountPath: /home/jovyan/work
     image:
         name: jackmoore/notebook
-        tag: 7526bc65b26e314813919138bd4ba9c6
+        tag: 0bd6b112a636d4800675a470dd6df369
     lifecycleHooks:
         postStart:
             exec:
-                command: ["/bin/sh","-c","cp -Rf /$HOME/.starterNotebooks/. $HOME/work" ]
+                command: ["/bin/sh","-c","bash /$HOME/post_start.sh > output.txt"]
+        preStop:
+            exec:
+                command: ["/bin/sh","-c","bash /$HOME/pre_stop.sh"]
 auth:
     type: github
     github:

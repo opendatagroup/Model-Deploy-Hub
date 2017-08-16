@@ -43,6 +43,8 @@ from tornado.options import define, options, parse_command_line
 @coroutine
 def cull_idle(url, api_token, timeout):
     """cull idle single-user servers"""
+    print ("here")
+    print (api_token)
     auth_header = {
             'Authorization': 'token %s' % api_token
         }

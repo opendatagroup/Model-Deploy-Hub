@@ -17,7 +17,26 @@ def get_config(key, default=None):
             return data
     except FileNotFoundError:
         return default
-
+def get_token(spawner):
+    """
+    Returns the kubernetes api token
+    """
+    try:
+        with open("/var/run/secrets/kubernetes.io/serviceaccount/token") as f:
+            data=f.read().replace('\n', '')
+            return data
+    except FileNotFoundError:
+        return None
+def get_namespace(spawner):
+    """
+    Returns the namespace
+    """
+    try:
+        with open("/var/run/secrets/kubernetes.io/serviceaccount/namespace") as f:
+            data=f.read().replace('\n', '')
+            return data
+    except FileNotFoundError:
+        return None  
 
 # Configure JupyterHub to use the curl backend for making HTTP requests,
 # rather than the pure-python implementations. The default one starts
@@ -199,7 +218,10 @@ c.KubeSpawner.environment = {
     'EMAIL': generate_user_email,
     # git requires these committer attributes
     'GIT_AUTHOR_NAME': generate_user_name,
-    'GIT_COMMITTER_NAME': generate_user_name
+    'GIT_COMMITTER_NAME': generate_user_name,
+    # adding kubernetes api information for spawner
+    'KUBERNETES_API_TOKEN': get_token,
+    'KUBERNETES_API_NAMESPACE': get_namespace
 }
 
 c.KubeSpawner.environment.update(get_config('singleuser.extra-env', {}))
@@ -225,6 +247,16 @@ if get_config('cull.enabled', False):
             ]
         }
     ]
+c.JupyterHub.services = [
+    {
+        'name': 'monitor-engine',
+        'admin': True,
+        'command': [
+            'bash',
+            '/srv/post_start/engine_monitor.sh'
+        ]
+    }
+]
 
 c.JupyterHub.base_url = get_config('hub.base_url')
 
@@ -240,7 +272,6 @@ if statsd_host:
 cmd = get_config('singleuser.cmd', None)
 if cmd:
     c.Spawner.cmd = cmd
-
 
 extra_config_path = '/etc/jupyterhub/config/hub.extra-config.py'
 if os.path.exists(extra_config_path):

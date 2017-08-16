@@ -10,4 +10,4 @@ the while including the Fastscore library and engines.
 
 ## heading<a name="headin"></a>
 
-![alt text](https://github.com/jackmoore5021/Model-Deploy-Hub/blob/master/documentation/Model_Deploy_Hub.jpg "Model Deploy Hub Diagram")
+![alt text](https://github.com/jackmoore5021/Model-Deploy-Hub/blob/master/documentation/Model_Deploy_Hub_Diagram.jpg "Model Deploy Hub Diagram")

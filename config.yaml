@@ -7,7 +7,7 @@ proxy:
     secretToken: ""
 singleuser:
     #extraEnv:
-    #    ENGINE_ADDRESS: "https://[IPADDRESS]:30001"
+    #    ENGINE_ADDRESS: "https://[MASTER_IP]:30001"
     storage:
         type: dynamic
         static:
@@ -30,7 +30,7 @@ singleuser:
 #    github:
 #        clientId: ""
 #        clientSecret: ""
-#        callbackUrl: "http://[IP ADDRESS]/hub/oauth_callback"
+#        callbackUrl: "http://[MASTER_IP]/hub/oauth_callback"
 cull:
     enabled: true
     timeout: 3600

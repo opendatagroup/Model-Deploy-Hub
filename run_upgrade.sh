@@ -26,12 +26,12 @@ rm config.yaml-e
 sleep 5
 # And upgrade the pods with the new config.yaml file
 printf "Upgrading helm chart with new configurations..."
-helm upgrade mdhub jupyterhub/jupyterhub --version=v0.4 -f config.yaml --timeout=1800 > trash.txt
+helm upgrade mdhdemo jupyterhub/jupyterhub --version=v0.4 -f config.yaml --timeout=1800 > trash.txt
 printf "DONE!\n"
 
 # Collect hub id
 HUBID="INVALID ID"
-HUBID=$(kubectl --namespace=mdhub get pods | grep hub | grep ContainerCreating | awk '{print $1;}')
+HUBID=$(kubectl --namespace=mdhdemo get pods | grep hub | grep ContainerCreating | awk '{print $1;}')
 if [ HUBID == "INVALID ID" ]; then
 	echo 'ERROR WITH HUB ID'
 	exit 1
@@ -42,7 +42,7 @@ STATUS="ContainerCreating"
 printf "Waiting for hub to deploy..."
 while [ $STATUS == "ContainerCreating" ]
 do
-	STATUS=$(kubectl --namespace=mdhub get pods ${HUBID} | grep hub | awk '{print $3;}')
+	STATUS=$(kubectl --namespace=mdhdemo get pods ${HUBID} | grep hub | awk '{print $3;}')
 	sleep 1
 done
 

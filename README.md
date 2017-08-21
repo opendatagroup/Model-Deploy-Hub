@@ -52,8 +52,8 @@ kubectl --namespace=[NAMESPACE] get po
 ### Setting up fastscore fleet
 Next you're going to want to deploy the fastscore fleet.  This is done by running the command:
 ```shell
-kubectl --namespace=[NAMESPACE] create -f ./images/fastscore.yaml
-kubectl --namespace=[NAMESPACE] create -f ./images/kafka.yaml
+kubectl --namespace=[NAMESPACE] create -f ./fleet/fastscore.yaml
+kubectl --namespace=[NAMESPACE] create -f ./fleet/kafka.yaml
 ```
 Then configurate the fleet using the restart_config script in the hub container
 ```shell

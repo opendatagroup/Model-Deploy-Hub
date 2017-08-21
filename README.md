@@ -4,11 +4,6 @@ Model-Deploy-Hub is an implementation of Jupyterhub on a kubernetes cluster usin
 
 ![alt text](https://github.com/jackmoore5021/Model-Deploy-Hub/blob/master/documentation/Model_Deploy_Hub_Diagram.jpg "Model Deploy Hub Diagram")
 
-## Table of Contents
-1. [Requirements](#requirements)
-2. [Example Deployment](#example)
-3. [Credits](#credits)
-
 ## Requirements<a name=#requirements></a>
 - Kubernetes: [Download](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - Helm: [Download](https://github.com/kubernetes/helm)
@@ -66,3 +61,8 @@ Then configurate the fleet using the restart_config script in the hub container
 kubectl --namespace=[NAMESPACE] exec [HUB_POD_NAME] -- [bash /serviceaccount/restart_config.sh]
 ```
 You now have a running fastscore fleet on the same cluster as your jupyterhub, and the engines are fully managed by the notebook containers.
+
+### Authorization
+This demo uses GitHub OAuth to authenticate users.  In order to set this up, go to their [developer settings](https://github.com/settings/developers) and register a new application.  Remember the ID and Secret, then copy them into the auth value in config.yaml, along with the ip address of your server
+
+

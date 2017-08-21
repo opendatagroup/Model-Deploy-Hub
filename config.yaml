@@ -6,8 +6,8 @@ hub:
 proxy:
     secretToken: ""
 singleuser:
-    #extraEnv:
-    #    ENGINE_ADDRESS: "https://[MASTER_IP]:30001"
+    extraEnv:
+        ENGINE_ADDRESS: "https://[MASTER_IP]:30001"
     storage:
         type: dynamic
         static:
@@ -25,12 +25,12 @@ singleuser:
         preStop:
             exec:
                 command: ["/bin/sh","-c","bash /$HOME/pre_stop.sh > /$HOME/output.txt"]
-#auth:
-#    type: github
-#    github:
-#        clientId: ""
-#        clientSecret: ""
-#        callbackUrl: "http://[MASTER_IP]/hub/oauth_callback"
+auth:
+    type: github
+    github:
+        clientId: ""
+        clientSecret: ""
+        callbackUrl: "http://[MASTER_IP]/hub/oauth_callback"
 cull:
     enabled: true
     timeout: 3600

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script to open a shell script in a pod, for debugging purposes
+# Run with bash run_exec.sh [name of pod]
 
 PODNAME="N/A"
 PODNAME=$(kubectl --namespace=local get pods | grep $1 | awk '{print $1;}')

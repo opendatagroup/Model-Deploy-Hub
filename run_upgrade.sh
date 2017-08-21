@@ -2,14 +2,7 @@
 
 # Use this bash script to write custom docker images for your hub and notebook
 
-# To be used
-# DOCKERHUBUSER='jackmoore'
-# DOCKERHUBIMAGE='hub'
-# DOCKERNOTEBOOKUSER='jackmoore'
-# DOCKERNOTEBOOKIMAGE='notebook'
-
-# To be used
-# OLDTAG=$(grep 'tag:' config.yaml | sed 's/^.*: //')
+# build and push docker images from images folder
 NEWTAG=$(openssl rand -hex 16)
 printf "Generating random tag: ${NEWTAG}\n"
 printf "Building hub..."
@@ -21,22 +14,20 @@ docker push jackmoore/hub:${NEWTAG} > trash.txt
 printf "DONE!\nPushing notebook..."
 docker push jackmoore/notebook:${NEWTAG} > trash.txt
 printf "DONE!\n"
-# docker rmi jackmoore/hub:${OLDTAG}
-# docker rmi jackmoore/notebook:${OLDTAG}
 
-
+# Replace config.yaml image tags with new images
 printf "Replacing image tags in config.yaml file..."
 sed -i -e 's/.*tag:.*/        tag: NEWTAG/' $(pwd)/config.yaml
 sed -i -e "s/NEWTAG/${NEWTAG}/g" $(pwd)/config.yaml
 printf "DONE!\n"
+#remove extra file
 rm config.yaml-e
 # Give docker a second to update
-sleep 1
-# And upgrade the pods
+sleep 5
+# And upgrade the pods with the new config.yaml file
 printf "Upgrading helm chart with new configurations..."
 helm upgrade mdhub jupyterhub/jupyterhub --version=v0.4 -f config.yaml --timeout=1800 > trash.txt
 printf "DONE!\n"
-
 
 # Collect hub id
 HUBID="INVALID ID"
@@ -45,7 +36,6 @@ if [ HUBID == "INVALID ID" ]; then
 	echo 'ERROR WITH HUB ID'
 	exit 1
 fi
-
 
 # Wait for hub to get up and running
 STATUS="ContainerCreating"
@@ -65,5 +55,4 @@ if [ $STATUS == "Running" ]; then
 else 
 	printf "ERROR (Hub status): ${STATUS}"
 fi
-
 rm trash.txt

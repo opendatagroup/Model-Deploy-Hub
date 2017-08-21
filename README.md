@@ -25,7 +25,7 @@ Next create a cluster
 ```shell
 gcloud container clusters create [NAMESPACE] --num-nodes=3 --machine-type=n1-standard-1 --zone=us-central1-b
 ```
-### initialize helm
+### Helm
 Initialize helm by running
 ```shell
 helm init
@@ -66,13 +66,3 @@ Then configurate the fleet using the restart_config script in the hub container
 kubectl --namespace=[NAMESPACE] exec [HUB_POD_NAME] -- [bash /serviceaccount/restart_config.sh]
 ```
 You now have a running fastscore fleet on the same cluster as your jupyterhub, and the engines are fully managed by the notebook containers.
-
-
-
-<<<<<<< HEAD
-## Credits<a name="credits"></a>
-=======
-## heading<a name="headin"></a>
-
-![alt text](https://github.com/jackmoore5021/Model-Deploy-Hub/blob/master/documentation/Model_Deploy_Hub_Diagram.jpg "Model Deploy Hub Diagram")
->>>>>>> 592a4f1cebf04a7bc7d09caea2bf88894b9aa51b

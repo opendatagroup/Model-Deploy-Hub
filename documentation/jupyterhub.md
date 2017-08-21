@@ -1,0 +1,3 @@
+## Jupyterhub
+
+[Jupyterhub](https://github.com/jupyterhub/jupyterhub) is a multi-user server for hosting jupyter notebooks.  It is composed of three main components:  the Hub (handles authentication, volume storage, and notebook spawning), a configurable http proxy (handles requests to the server), and multiple notebooks (individual notebooks dedicated to each user).  Model deploy hub spawns these objects in a kubernetes cluster, and uses [Helm](https://github.com/kubernetes/helm) to manage the kubernetes resources.

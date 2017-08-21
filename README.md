@@ -69,4 +69,10 @@ You now have a running fastscore fleet on the same cluster as your jupyterhub, a
 
 
 
+<<<<<<< HEAD
 ## Credits<a name="credits"></a>
+=======
+## heading<a name="headin"></a>
+
+![alt text](https://github.com/jackmoore5021/Model-Deploy-Hub/blob/master/documentation/Model_Deploy_Hub_Diagram.jpg "Model Deploy Hub Diagram")
+>>>>>>> 592a4f1cebf04a7bc7d09caea2bf88894b9aa51b

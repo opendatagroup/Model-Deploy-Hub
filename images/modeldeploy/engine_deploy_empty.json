@@ -1,0 +1,45 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Deployment",
+  "metadata": {
+    "creationTimestamp": null,
+    "name": "engine-X"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {},
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "engine-X"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "CONNECT_PREFIX",
+                "value": "https://connect:8001"
+              }
+            ],
+            "image": "fastscore/engine-x:latest",
+            "name": "engine-X",
+            "ports": [
+              {
+                "containerPort": 8003,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "stdin": true,
+            "tty": true
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    }
+  },
+  "status": {}
+}

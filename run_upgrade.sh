@@ -13,9 +13,9 @@
 NEWTAG=$(openssl rand -hex 16)
 printf "Generating random tag: ${NEWTAG}\n"
 printf "Building hub..."
-docker build -q -t jackmoore/hub:${NEWTAG} $(pwd)/chart/images/hub/. > trash.txt
+docker build -q -t jackmoore/hub:${NEWTAG} $(pwd)/images/hub/. > trash.txt
 printf "DONE!\nBuilding notebook..."
-docker build -q -t jackmoore/notebook:${NEWTAG} $(pwd)/chart/images/modeldeploy/. > trash.txt
+docker build -q -t jackmoore/notebook:${NEWTAG} $(pwd)/images/modeldeploy/. > trash.txt
 printf "DONE!\nPushing hub..."
 docker push jackmoore/hub:${NEWTAG} > trash.txt
 printf "DONE!\nPushing notebook..."
@@ -59,6 +59,7 @@ done
 # Open web page if running
 if [ $STATUS == "Running" ]; then
 	printf "DONE!\nOpening web page in incognito mode on chrome..."
+	sleep 3
 	bash run_openpage.sh
 	printf "DONE!\n"
 else 

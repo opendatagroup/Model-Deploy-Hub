@@ -1,17 +1,13 @@
 hub:
-    cookieSecret: "821504fe5879054fd5e03a380ba90bfb4b95b73c3c255bac3dccb5855575a855"
+    cookieSecret: ""
     image:
         name: jackmoore/hub
-        tag: 0bd6b112a636d4800675a470dd6df369
-    lifecycleHooks:
-        postStart:
-            exec:
-                command: ["/bin/sh","-c","export CONNECTIP='https://130.211.206.35:30001'"]
+        tag: cc2714c254f33f97f60386df0fbff291
 proxy:
-    secretToken: "3366e8fc0748609355ac37b5cffc252c63be3a1f17e6ebe5f29c1801413810d7"
+    secretToken: ""
 singleuser:
-    extraEnv:
-        ENGINE_CONTAINER: "engine-x-1"
+    #extraEnv:
+    #    ENGINE_ADDRESS: "https://[IPADDRESS]:30001"
     storage:
         type: dynamic
         static:
@@ -21,20 +17,20 @@ singleuser:
         homeMountPath: /home/jovyan/work
     image:
         name: jackmoore/notebook
-        tag: 0bd6b112a636d4800675a470dd6df369
+        tag: cc2714c254f33f97f60386df0fbff291
     lifecycleHooks:
         postStart:
             exec:
-                command: ["/bin/sh","-c","bash /$HOME/post_start.sh > output.txt"]
+                command: ["/bin/sh","-c","bash /$HOME/post_start.sh > /$HOME/post_start_out.txt"]
         preStop:
             exec:
-                command: ["/bin/sh","-c","bash /$HOME/pre_stop.sh"]
-auth:
-    type: github
-    github:
-        clientId: "42066cc02d3b6ac2f687"
-        clientSecret: "853d2d8af2415d33e1b26811cf534927ca28e6a4"
-        callbackUrl: "http://130.211.206.35/hub/oauth_callback"
+                command: ["/bin/sh","-c","bash /$HOME/pre_stop.sh > /$HOME/output.txt"]
+#auth:
+#    type: github
+#    github:
+#        clientId: ""
+#        clientSecret: ""
+#        callbackUrl: "http://[IP ADDRESS]/hub/oauth_callback"
 cull:
     enabled: true
     timeout: 3600

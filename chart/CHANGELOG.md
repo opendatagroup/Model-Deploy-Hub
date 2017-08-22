@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Added Fastscore kubernetes manifests to templates
+
 ## Releases
 
 Releases are now named after famous [Cricket](https://en.wikipedia.org/wiki/Cricket) players.

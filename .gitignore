@@ -1,2 +1,6 @@
 sharednotebook/
 .DS_store
+run_exec.sh
+run_upgrade.sh
+run_openpage.sh
+config.yaml

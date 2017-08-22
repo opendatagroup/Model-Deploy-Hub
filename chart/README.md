@@ -39,20 +39,9 @@ Docker images for applications including:
 - `proxy`
 - `singleuser-sample`
 
-### `Makefile`
+Added for use with Model Deploy Hub:
 
-Useful for compiling custom charts.
-
-## Usage
-
-To build and push Docker images in the `images` directory:
-
-    make images
-
-To create chart metadata and package chart for use:
-
-    make chart
-
+- `fastscore` 
 
 [JupyterHub]: https://jupyterhub.readthedocs.io/en/latest/
 [Kubernetes]: https://kubernetes.io
